@@ -29,7 +29,7 @@ public class CsvReader {
     /**
      * コンストラクタ
      * @param stream CSVデータを格納したInputStream
-     * @param encode 文字コード指定文字列("MS932","UTF-8" 等)
+     * @param encode 文字コード指定文字列("UTF-8","UTF-8" 等)
      * @throws Exception
      */
     public CsvReader(InputStream stream, String encode) throws Exception{

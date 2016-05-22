@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMapConfig
+            PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
+            "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+<!-- SqlMapConfig定義 -->
+<sqlMapConfig>
+    <settings useStatementNamespaces="true" />
+    <transactionManager type="JDBC">
+        <dataSource type="SIMPLE">
+            <property name="JDBC.Driver" value="com.mysql.jdbc.Driver" />
+            <property name="JDBC.ConnectionURL" value="jdbc:mysql://133.242.158.112:13306/test" />
+            <property name="JDBC.Username" value="senkyo" />
+            <property name="JDBC.Password" value="2d9fd16d" />
+            <!-- OPTIONAL PROPERTIES BELOW -->
+			<property name="JDBC.DefaultAutoCommit" value="false"/>
+        </dataSource>
+    </transactionManager>
+
+    <sqlMap resource="okazaki/sqlMap.xml" />
+
+</sqlMapConfig>

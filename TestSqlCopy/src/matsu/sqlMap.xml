@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+            PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+            "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!-- SqlMap定義 -->
+<sqlMap >
+  <!-- 属性の説明
+  id
+  必須. SQL文を識別するための値. 一意な値であれば動作するが、一般的にはプロジェクトごとに命名ルールがある
+
+  resultClass
+  SELECT文の結果を格納するクラスを指定する.
+  Beanを指定することが多い. Beanの場合はSELECT文結果の列名とBeanのフィールド名でマッピング(関連付け)する
+  IntegerなどJava標準クラスを指定することも可能.
+
+  parameterClass
+  引数を渡す場合に使用する.
+  「#id#」のように「#」で囲まれた箇所が値に置き換わる.
+  BeanかMapの型を指定することが多い
+  -->
+
+  <select id="selectList"
+          resultClass="matsu.entity.EntitySample">
+    SELECT
+        goods_id goods_id,
+        goods_name goods_name
+    FROM
+        goods
+  </select>
+
+  <select id="selectObject"  parameterClass="java.util.Map"
+          resultClass="matsu.entity.EntitySample">
+    SELECT
+        goods_id,
+        goods_name
+    FROM
+        goods
+    WHERE
+    	goods_id=#goodsId#
+  </select>
+
+  <select id="selectObject2"  parameterClass="matsu.entity.EntitySample"
+          resultClass="matsu.entity.EntitySample">
+    SELECT
+        goods_id goods_id,
+        goods_name goods_name
+    FROM
+        goods
+    WHERE
+    	goods_id=#goods_id#
+    AND
+        goods_name = #goods_name#
+  </select>
+
+  <insert id="registFile"
+          parameterClass="java.util.Map">
+    INSERT INTO T_SYAIN_MST
+    VALUES (
+        #syainId#,
+        #busyoId#,
+        #nameL#,
+        #nameF#,
+        #knameL#,
+        #knameF#,
+        #zipcd#,
+        #kaddress1#,
+        #kaddress2#,
+        #kaddress3#,
+        #telno#,
+        #sintyou#,
+        NULL,
+        SYSDATE()
+    )
+  </insert>
+
+  <delete id="deleteFile"
+          parameterClass="java.util.Map">
+    DELETE FROM
+        T_SYAIN_MST
+    WHERE
+        SYAIN_ID = #syainId#
+  </delete>
+
+  <update id = "t" >
+      UPDATE
+          goods
+      SET
+          GOODS_NAME = 'test'
+      WHERE
+          GOODS_ID = 'G001';
+  </update>
+
+  <update id = "t2"
+          parameterClass = "java.lang.String">
+      UPDATE
+          goods
+      SET
+          GOODS_NAME = #str#
+      WHERE
+          GOODS_ID = #str#;
+  </update>
+
+  <select id = "t3"
+         resultClass = "java.lang.Integer">
+     SELECT
+         COUNT(*)
+     FROM
+         goods
+  </select>
+
+  <select id = "t4"
+         resultClass = "java.lang.String">
+     SELECT
+         syain_Id,
+         kname_L
+     FROM
+         T_SYAIN_MST
+  </select>
+
+<!--ここから練習 -->
+ <select id="selectMyList"
+          resultClass="matsu.entity.EntitySample">
+    SELECT
+        name animalname
+    FROM
+        practice_table
+ </select>
+
+<select id = "getparm"
+    parameterClass="matsu.entity.EntitySample"
+    resultClass = "matsu.entity.EntitySample">
+SELECT
+    type animaltype
+   ,name animalname
+FROM
+     practice_table
+WHERE
+     type =  #animaltype#
+AND  name = #animalname#
+</select>
+
+<!--ここから いなのターンです -->
+<select id = "001"
+    resultClass="matsu.entity.EntitySample">
+    SELECT
+        *
+    FROM
+        ina
+</select>
+
+<select id = "001_2"
+    resultClass="matsu.entity.EntitySample">
+    SELECT Number,Name,Gen
+    FROM ina
+</select>
+
+<insert id = "002"
+    parameterClass="matsu.entity.EntitySample">
+    INSERT INTO ina
+    VALUES(
+        #number#,
+        #name#,
+        #gen#)
+</insert>
+
+<update id ="003"
+    parameterClass="matsu.entity.EntitySample">
+    UPDATE ina
+    SET name = #name#
+    WHERE number = #number#;
+</update>
+
+<delete id = "004"
+    parameterClass="matsu.entity.EntitySample">
+    DELETE
+    FROM ina
+    WHERE name = #name#
+
+</delete>
+
+<!--ここから ターンです -->
+<insert id = "A01"
+    parameterClass="matsu.entity.MainTest_3">
+
+INSERT INTO T_SYAIN_MST
+
+VALUE(
+    #syain_id#,
+    #busyo_id#,
+    #name_l#,
+    #name_f#,
+    #kname_l#,
+    #kname_f#,
+    #zip_cd#,
+    #kaddress_1#,
+    #kaddress_2#,
+    #kaddress_3#,
+    #tel_no#,
+    #sintyou#,
+    NULL,
+    SYSDATE()
+    );
+</insert>
+
+<delete id="B02"
+    parameterClass="matsu.entity.MainTest_3">
+
+DELETE FROM T_SYAIN_MST
+WHERE SYAIN_ID = #syain_id#
+
+</delete>
+
+<select id="C03"
+    parameterClass="matsu.entity.MainTest_3"
+    resultClass="java.lang.Integer">
+SELECT COUNT(*)
+FROM T_SYAIN_MST
+WHERE SYAIN_ID = #syain_id#
+</select>
+
+<update id="D04"
+    parameterClass="matsu.entity.MainTest_3">
+
+UPDATE T_SYAIN_MST
+SET
+    BUSYO_ID = #busyo_id#,
+    NAME_L = #name_l#,
+    NAME_F = #name_f#,
+    KNAME_L = #kname_l#,
+    KNAME_F = #kname_f#,
+    ZIP_CD = #zip_cd#,
+    KADDRESS_1 = #kaddress_1#,
+    KADDRESS_2 = #kaddress_2#,
+    KADDRESS_3 = #kaddress_3#,
+    TEL_NO = #tel_no#,
+    SINTYOU = #sintyou#,
+    UPDATE_DT = SYSDATE()
+
+WHERE SYAIN_ID = #syain_id#
+</update>
+
+<insert id = "E05"
+    parameterClass="matsu.entity.MainTest_3">
+
+INSERT INTO T_SYAIN_MST
+VALUE(
+    #syain_id#,
+    #busyo_id#,
+    #name_l#,
+    #name_f#,
+    #kname_l#,
+    #kname_f#,
+    #zip_cd#,
+    #kaddress_1#,
+    #kaddress_2#,
+    #kaddress_3#,
+    #tel_no#,
+    #sintyou#,
+    NULL,
+    SYSDATE()
+    );
+</insert>
+
+
+<!-- 設定例
+  <select id="getUserCount"
+          parameterClass="jp.terasoluna.sample.user.dao.GetUserCountInput"
+          resultClass="jp.terasoluna.sample.user.dao.GetUserCountOutput">
+    SELECT
+        COUNT (*) AS userCount
+    FROM
+        USERLIST
+    WHERE
+        ID = #userId#
+  </select>
+
+  <insert id="insertUser"
+          parameterClass="jp.terasoluna.sample.user.dao.InsertUserInput">
+    INSERT INTO USERLIST (
+        ID,
+        NAME
+    )
+    VALUES (
+        #userId#,
+        #userName#
+    )
+  </insert>
+
+  <update id="updateUser"
+          parameterClass="jp.terasoluna.sample.user.dao.UpdateUserInput">
+    UPDATE USERLIST
+    SET
+        NAME = #userName#
+    WHERE
+        ID = #userId#
+  </update>
+
+  <delete id="deleteUser"
+          parameterClass="jp.terasoluna.sample.user.dao.DeleteUserInput">
+    DELETE FROM
+        USERLIST
+    WHERE
+        ID = #userId#
+  </delete>
+-->
+</sqlMap>

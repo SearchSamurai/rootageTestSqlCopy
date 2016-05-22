@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+            PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+            "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!-- SqlMap定義 -->
+<sqlMap>
+
+  <!-- SELECT (パラメータ無し) queryForList -->
+  <select id = "selectList" resultClass="okazaki.entity.RcSample">
+    SELECT
+        goods_id AS goodsId,
+        goods_name AS goodsName
+    FROM
+        goods
+  </select>
+
+  <!-- SELECT (パラメータ無し) queryForList -->
+  <select id = "selectList2" resultClass="okazaki.entity.RcSample">
+    SELECT
+        goods_id AS goodsId,
+        goods_name AS goodsName
+    FROM
+        goods
+    WHERE
+        goods_name = '&lt;真&gt;お茶'
+  </select>
+
+  <!-- SELECT (パラメータ無し) queryForList -->
+  <select id = "selectList3" resultClass="okazaki.entity.RcSample">
+    SELECT
+        goods_id AS goodsId,
+        goods_name AS goodsName
+    FROM
+        goods
+    WHERE
+        goods_name =  <![CDATA['<真>お茶']]>
+  </select>
+
+  <!-- SELECT (パラメータ無し) queryForObject -->
+  <select id = "selectObject" resultClass="okazaki.entity.RcSample">
+    SELECT
+        goods_id AS goodsId,
+        goods_name AS goodsName
+    FROM
+        goods
+    WHERE
+        goods_id = 3
+  </select>
+
+    <!-- SELECT (パラメータクラスを使用する) Bean -->
+  <select id = "selectObject2"  parameterClass="okazaki.entity.RcSample" resultClass="okazaki.entity.RcSample">
+    SELECT
+        goods_id AS goodsId,
+        goods_name AS goodsName,
+        format,
+        unit_price AS unitPrice
+    FROM
+        goods
+    WHERE
+        goods_id = #goodsId#
+  </select>
+
+  <!-- SELECT (パラメータクラスを使用する) Map -->
+  <select id = "selectObject3"  parameterClass="java.util.Map"
+  		resultClass="okazaki.entity.RcSample">
+    SELECT
+        goods_id AS goodsId,
+        goods_name AS goodsName,
+        format,
+        unit_price AS unitPrice
+    FROM
+        goods
+    WHERE
+        goods_id = #goodsId#
+  </select>
+
+  <!-- INSERT (パラメータクラスを使用する) Bean -->
+  <insert id="insertRecord"
+          parameterClass="okazaki.entity.RcSample">
+    INSERT INTO goods VALUES (
+        #goodsId#,
+        #goodsName#,
+        #format#,
+        #unitPrice#
+    )
+  </insert>
+
+  <!-- INSERT (パラメータクラスを使用する) Map -->
+  <insert id="insertRecord2"
+          parameterClass="java.util.Map">
+    INSERT INTO goods VALUES (
+        #goodsId#,
+        #goodsName#,
+        #format#,
+        #unitPrice#
+    )
+  </insert>
+
+  <!-- UPDATE (パラメータクラスを使用する) Bean -->
+  <update id ="updateRecord"
+    parameterClass="okazaki.entity.RcSample">
+    UPDATE goods
+    SET goods_name = #goodsName#
+    WHERE goods_id = #goodsId#
+  </update>
+
+  <!-- UPDATE (パラメータクラスを使用する) Map -->
+  <update id ="updateRecord2"
+    parameterClass="java.util.Map">
+    UPDATE goods
+    SET goods_name = #goodsName#
+    WHERE goods_id = #goodsId#
+  </update>
+
+  <!-- DELETE (パラメータクラスを使用する) Bean -->
+  <delete id="deleteRecord"
+    parameterClass="okazaki.entity.RcSample">
+	DELETE FROM goods
+	WHERE goods_id = #goodsId#
+  </delete>
+
+  <!-- DELETE (パラメータクラスを使用する) Map -->
+  <delete id="deleteRecord2"
+    parameterClass="java.util.Map">
+  	DELETE FROM goods
+  	WHERE goods_id = #goodsId#
+  </delete>
+
+  <!-- 研究課題1 登録 -->
+  <insert id="kenkyuKadai"
+          parameterClass="okazaki.KenkyuKadai.KkBean">
+    INSERT INTO T_SYAIN_MST VALUES (
+        #syainId#,
+        #busyoId#,
+        #nameL#,
+        #nameF#,
+        #kNameL#,
+        #kNameF#,
+        #zipCd#,
+        #kAddress1#,
+        #kAddress2#,
+		#kAddress3#,
+		#telNo#,
+		#sintyou#,
+		#updateDt#,
+		SYSDATE()
+    )
+  </insert>
+
+  <!-- 研究課題1 削除 -->
+  <delete id="kenkyuKadai2"
+    parameterClass="okazaki.KenkyuKadai.KkBean">
+	DELETE FROM T_SYAIN_MST
+	WHERE SYAIN_ID = #syainId#
+  </delete>
+
+    <!-- 研究課題1 登録 -->
+  <insert id="kenkyuKadai1"
+          parameterClass="okazaki.KenkyuKadai1.KkBean1">
+    INSERT INTO T_SYAIN_MST VALUES (
+        #syainId#,
+        #busyoId#,
+        #nameL#,
+        #nameF#,
+        #kNameL#,
+        #kNameF#,
+        #zipCd#,
+        #kAddress1#,
+        #kAddress2#,
+		#kAddress3#,
+		#telNo#,
+		#sintyou#,
+		#updateDt#,
+		SYSDATE()
+    )
+  </insert>
+
+  <!-- 研究課題1 削除 -->
+  <delete id="kenkyuKadai1_1"
+    parameterClass="okazaki.KenkyuKadai1.KkBean1">
+	DELETE FROM T_SYAIN_MST
+	WHERE SYAIN_ID = #syainId#
+  </delete>
+
+</sqlMap>

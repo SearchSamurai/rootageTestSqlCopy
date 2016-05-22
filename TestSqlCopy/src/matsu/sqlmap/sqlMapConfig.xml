@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMapConfig
+            PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
+            "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+<!-- SqlMapConfig定義 -->
+<sqlMapConfig>
+    <settings useStatementNamespaces="true" />
+    <!-- DB接続情報. iBATISの中で重要!! -->
+    <transactionManager type="JDBC">
+        <dataSource type="SIMPLE">
+            <property name="JDBC.Driver" value="com.mysql.jdbc.Driver" />
+            <property name="JDBC.ConnectionURL" value="jdbc:mysql://133.242.158.112:13306/test" />
+            <property name="JDBC.Username" value="senkyo" />
+            <property name="JDBC.Password" value="2d9fd16d" />
+            <!-- OPTIONAL PROPERTIES BELOW -->
+			<property name="JDBC.DefaultAutoCommit" value="false"/>
+        </dataSource>
+    </transactionManager>
+
+    <!-- SQL文を記述するファイルの相対パス -->
+    <sqlMap resource="matsu/sqlMap.xml" />
+    <!-- 実務では複数定義することが多い
+    パターン1: 給与、人事の様に、機能ごとに定義する (実務で多い)
+    パターン2: テーブルごとに定義する
+    <sqlMap resource="hoge/fuga.xml" />
+    <sqlMap resource="hoge/piyo.xml" />
+    -->
+
+</sqlMapConfig>
